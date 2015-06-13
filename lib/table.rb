@@ -41,11 +41,13 @@ module HoldEm
     def award_winnings(winner)
       winner.chips += pot
       pot = 0
+      winner
     end
 
     def return_to_deck(cards)
       deck.reclaim(cards)
       cards.clear
+      true
     end
   end
 end

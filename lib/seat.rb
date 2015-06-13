@@ -20,6 +20,7 @@ module HoldEm
 
     def reset_last_action
       @last_action = nil
+      true
     end
 
     def fold?

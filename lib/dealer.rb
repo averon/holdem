@@ -13,11 +13,13 @@ module HoldEm
           seat.pocket << deck.pop
         end
       end
+      seats
     end
 
     def flop(board)
       burn << deck.pop
       3.times { board << deck.pop }
+      board
     end
 
     def turn(board)
@@ -32,6 +34,7 @@ module HoldEm
 
     def shuffle!
       deck.shuffle!
+      self
     end
   end
 end
