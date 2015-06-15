@@ -2,7 +2,7 @@ module HoldEm
   class Table
     extend Forwardable
 
-    attr_reader :board, :dealer, :pot, :seats
+    attr_reader :board, :dealer, :pot
 
     def_delegators :dealer, :deck
 
@@ -11,6 +11,22 @@ module HoldEm
       @dealer = Dealer.new
       @pot = 0
       @seats = Array.new(seats) { Seat.new }
+    end
+
+    def seat_player(player, seat=nil)
+      raise ArgumentError, "Cannot seat player: #{player}" unless player.is_a?(HoldEm::Player)
+      raise ArgumentError, "Seat #{seat} is currently occupied" if seat && seats[seat] && seats[seat].player
+      raise RuntimeError, "All seats are full." unless seats.any? { |seat| seat.empty? }
+
+      seat ||= seats.find_index { |seat| seat.empty? }
+      seats[seat].player = player
+      true
+    end
+
+    def unseat_player(player)
+      seat = seat.find { |seat| seat.player == player }
+      seat.player = nil
+      true
     end
 
     def showdown
@@ -32,6 +48,8 @@ module HoldEm
     end
 
     private
+
+    attr_reader :seats
 
     def winner
       # TODO: Implement

@@ -13,6 +13,10 @@ module HoldEm::Rules
       hand_rank * 100_000 + matched_values * 100 + card_values
     end
 
+    def rank(hand)
+      rankify(hand)
+    end
+
     private
 
     def ranks
@@ -25,13 +29,14 @@ module HoldEm::Rules
         :flush,
         :full_house,
         :four_of_a_kind,
-        :straight_flush
+        :straight_flush,
+        :royal_flush
       ]
     end
 
-
     def rankify(hand) # TODO: Optimize helper methods for speed if necessary.
       case hand
+      when ->(hand) { royal_flush?(hand)     } then :royal_flush
       when ->(hand) { straight_flush?(hand)  } then :straight_flush
       when ->(hand) { four_of_a_kind?(hand)  } then :four_of_a_kind
       when ->(hand) { full_house?(hand)      } then :full_house
@@ -42,6 +47,10 @@ module HoldEm::Rules
       when ->(hand) { one_pair?(hand)        } then :one_pair
       else :high_card
       end
+    end
+
+    def royal_flush?(hand)
+      straight_flush?(hand) && hand.map(&:rank).include?(:ace)
     end
 
     def straight_flush?(hand)

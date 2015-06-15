@@ -15,10 +15,14 @@ module HoldEm
   class Hand < Cards
     include Comparable
 
+    attr_reader :value, :rank
+
     def initialize(cards)
       @cards = cards.to_a
       @maximum_size = 5
       @rules = HoldEm::Rules::Hands.instance
+      @value = evaluate(self)
+      @rank = rank(self)
 
       raise StandardError, "Invalid number of cards. #{cards.size}/#{maximum_size}" unless cards.size == maximum_size
     end
@@ -27,14 +31,10 @@ module HoldEm
       self.value <=> other.value
     end
 
-    def value
-      @value ||= evaluate(self)
-    end
-
     private
 
-    attr_accessor :rules
+    attr_reader :rules
 
-    def_delegators :rules, :evaluate
+    def_delegators :rules, :evaluate, :rank
   end
 end

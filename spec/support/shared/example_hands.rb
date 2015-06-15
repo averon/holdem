@@ -1,11 +1,18 @@
 shared_context 'Example Hands' do
   EXAMPLE_HANDS = {
-    straight_flush: [
+    royal_flush: [
       [:ace,   :spades],
       [:king,  :spades],
       [:queen, :spades],
       [:jack,  :spades],
       [:ten,   :spades]
+    ],
+    straight_flush: [
+      [:king,  :spades],
+      [:queen, :spades],
+      [:jack,  :spades],
+      [:ten,   :spades],
+      [:nine,  :spades]
     ],
     four_of_a_kind: [
       [:ace,  :spades],

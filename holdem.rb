@@ -10,29 +10,13 @@ require 'singleton'
 
 library = [
   ['lib', '**.rb'],
-  ['lib', '**', '**.rb']
+  ['lib', '**', '**.rb'],
+  ['app', '**.rb']
 ]
 library.each { |path_arguments| require_directory(path_arguments) }
 
 ###
 
-table = HoldEm::Table.new
-dealer = table.dealer
-seats = table.seats
-
-seats.each { |seat| seat.player = HoldEm::Player.new }
-active_seats = seats.select { |s| s.player }
-
-dealer.shuffle!
-dealer.deal(active_seats)
-
-board = dealer.flop(table.board)
-
-players_holding = active_seats.map do |seat|
-  cards = seat.pocket.to_a + board.to_a
-  HoldEm::Hand.new(cards)
-end
-
-require 'pry'; binding.pry
-puts 'bye'
+game = HoldEm::Game.new
+game.start
 

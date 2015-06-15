@@ -24,7 +24,7 @@ module HoldEm
     include Enumerable
     extend Forwardable
 
-    def_delegators :cards, :size, :pop, :clear
+    def_delegators :cards, :size, :pop, :clear, :empty?
 
     def initialize(maximum_size=0)
       @cards = []

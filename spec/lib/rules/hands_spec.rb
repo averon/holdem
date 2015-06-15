@@ -7,10 +7,18 @@ describe HoldEm::Rules::Hands do
 
   describe '#evaluate(hand)' do
     context 'when passed a valid' do
+      describe 'royal flush' do
+        let(:cards) { EXAMPLE_HANDS[:royal_flush] }
+
+        it 'has score 9xx' do
+          expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(9)
+        end
+      end
+
       describe 'straight flush' do
         let(:cards) { EXAMPLE_HANDS[:straight_flush] }
 
-        it 'has score 7xx' do
+        it 'has score 8xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(8)
         end
       end
@@ -18,7 +26,7 @@ describe HoldEm::Rules::Hands do
       describe 'four of a kind' do
         let(:cards) { EXAMPLE_HANDS[:four_of_a_kind] }
 
-        it 'is has score 6xx' do
+        it 'has score 7xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(7)
         end
       end
@@ -26,7 +34,7 @@ describe HoldEm::Rules::Hands do
       describe 'full house' do
         let(:cards) { EXAMPLE_HANDS[:full_house] }
 
-        it 'has score 5xx' do
+        it 'has score 6xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(6)
         end
       end
@@ -34,7 +42,7 @@ describe HoldEm::Rules::Hands do
       describe 'flush' do
         let(:cards) { EXAMPLE_HANDS[:flush] }
 
-        it 'has score 4xx' do
+        it 'has score 5xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(5)
         end
       end
@@ -42,7 +50,7 @@ describe HoldEm::Rules::Hands do
       describe 'straight' do
         let(:cards) { EXAMPLE_HANDS[:straight] }
 
-        it 'has score 3xx' do
+        it 'has score 4xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(4)
         end
       end
@@ -50,7 +58,7 @@ describe HoldEm::Rules::Hands do
       describe 'three of a kind' do
         let(:cards) { EXAMPLE_HANDS[:three_of_a_kind] }
 
-        it 'has score 2xx' do
+        it 'has score 3xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(3)
         end
       end
@@ -58,7 +66,7 @@ describe HoldEm::Rules::Hands do
       describe 'two pair' do
         let(:cards) { EXAMPLE_HANDS[:two_pair] }
 
-        it 'has score 1xx' do
+        it 'has score 2xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(2)
         end
       end
@@ -66,7 +74,7 @@ describe HoldEm::Rules::Hands do
       describe 'one pair' do
         let(:cards) { EXAMPLE_HANDS[:one_pair] }
 
-        it 'has score 0xx' do
+        it 'has score 1xx' do
           expect(subject.evaluate(HoldEm::Hand(*cards)) / 100_000).to eq(1)
         end
       end
