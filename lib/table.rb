@@ -45,7 +45,7 @@ module HoldEm
     end
 
     def return_to_deck(cards)
-      deck.reclaim(cards)
+      deck.claim!(cards)
       cards.clear
       true
     end
