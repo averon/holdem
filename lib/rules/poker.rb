@@ -1,5 +1,5 @@
-module HoldEm::Rules
-  class Hands
+module Rules
+  class Poker
     include Singleton
 
     def evaluate(hand)

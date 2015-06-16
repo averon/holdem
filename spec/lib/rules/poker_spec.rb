@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe HoldEm::Rules::Hands do
+describe Rules::Poker do
   include_context 'Example Hands'
 
   subject { described_class.instance }

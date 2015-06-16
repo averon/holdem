@@ -20,7 +20,7 @@ module HoldEm
     def initialize(cards)
       @cards = cards.to_a
       @maximum_size = 5
-      @rules = HoldEm::Rules::Hands.instance
+      @rules = Rules::Poker.instance
       @value = evaluate(self)
       @rank = rank(self)
 

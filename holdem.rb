@@ -16,7 +16,7 @@ library = [
 library.each { |path_arguments| require_directory(path_arguments) }
 
 ###
-
-game = HoldEm::Game.new
+players = Array.new(6) { HoldEm::Player.new }
+game = HoldEm::Game.new(players)
 game.start
 
