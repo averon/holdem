@@ -22,7 +22,7 @@ module HoldEm
       @maximum_size = 5
       @rules = Rules::Poker.instance
       @value = evaluate(self)
-      @rank = rank(self)
+      @rank = get_rank(self)
 
       raise StandardError, "Invalid number of cards. #{cards.size}/#{maximum_size}" unless cards.size == maximum_size
     end
@@ -35,6 +35,6 @@ module HoldEm
 
     attr_reader :rules
 
-    def_delegators :rules, :evaluate, :rank
+    def_delegators :rules, :evaluate, :get_rank
   end
 end

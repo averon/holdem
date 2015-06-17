@@ -45,11 +45,16 @@ module HoldEm
       seats.each(*args, &block)
     end
 
-    private
+    def to_play
+      seats.max { |seat| seat.current_bet }.current_bet
+    end
 
     def active_seats
       seats.select { |seat| seat.player }
     end
+    alias_method :active, :active_seats
+
+    private
 
     def big_blind
       button_index(button + 2)

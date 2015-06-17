@@ -13,7 +13,7 @@ module Rules
       hand_rank * 100_000 + matched_values * 100 + card_values
     end
 
-    def rank(hand)
+    def get_rank(hand)
       rankify(hand)
     end
 

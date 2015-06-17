@@ -14,6 +14,7 @@ module HoldEm
 
     def play_round
       3.times { dealer.shuffle! }
+      table.place_blinds
       dealer.deal(seats.standard_round)
 
       action(seats.first_round)
@@ -35,11 +36,17 @@ module HoldEm
 
     private
 
-    def action(active_seats)
-      active_seats.each { |seat| play(seat) }
+    def action(seats)
+      seats.each { |seat| play(seat) }
     end
 
     def play(seat)
+      if !board.empty? && seat.best_hand(board).rank == :high_card
+        seat.fold!
+      else
+        chips_to_play = seats.to_play - seat.current_bet
+        seat.bet(chips_to_play)
+      end
     end
   end
 end
